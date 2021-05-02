@@ -39,8 +39,8 @@ const SplashScreen = ({navigation}) => {
         >
             <Text style={[styles.title, {
                 color: colors.text
-            }]}>Stay connected with everyone!</Text>
-            <Text style={styles.text}>Sign in with account</Text>
+            }]}>Course you care about!</Text>
+            <Text style={styles.text}>Get Started</Text>
             <View style={styles.button}>
             <TouchableOpacity onPress={()=>navigation.navigate('campaigns')}>
                 <LinearGradient

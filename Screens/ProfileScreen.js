@@ -4,7 +4,7 @@ import {Ionicons,MaterialCommunityIcons, Entypo, MaterialIcons} from '@expo/vect
 import * as Animatable from 'react-native-animatable';
 import {LinearGradient} from 'expo-linear-gradient'
 import * as ImagePicker from 'expo-image-picker';
-
+import firebase from "../firebase/firebase";
 import { 
     View, 
     Text, 
@@ -19,15 +19,16 @@ import {
 } from 'react-native';
 
  class ProfileScreen extends React.Component{
+
   constructor(props) {
     super(props);
     this.state = { 
-      image: null,
+    image: null
     };
   }
-
-
-
+   
+   
+ 
 componentDidMount=()=>{
   (async () => {
     if (Platform.OS !== 'web') {
@@ -70,6 +71,13 @@ componentDidMount=()=>{
                        console.log(error)
            }
        }
+
+       var user= firebase.auth().currentUser;
+       var email;
+       if (user != null) {
+         email = user.email;
+       }
+       console.log(user.email)
         return(
             <ScrollView  style={styles.container}>
              <StatusBar backgroundColor='#009387' barStyle="light-content"/>
@@ -93,11 +101,11 @@ componentDidMount=()=>{
                                 >
                                     <Ionicons name="ios-camera" size={30} color="#000"></Ionicons>
                                 </TouchableOpacity>
-                              <View style={{marginLeft: 20}}>
+                              <View>
                                 <Text style={[styles.title, {
                                   marginTop:15,
                                   marginBottom: 5,
-                                }]}>John Doe</Text>
+                                }]}>{user.email} </Text>
                                 <Text style={styles.caption}>@j_doe</Text>
                               </View>
                             </View>
@@ -111,7 +119,7 @@ componentDidMount=()=>{
                             </View>
                             <View style={styles.row}>
                               <Entypo name="email" color="#777777" size={20}/>
-                              <Text style={{color:"#777777", marginLeft: 20}}>john_doe@email.com</Text>
+                              <Text style={{color:"#777777", marginLeft: 20}}>{user.email}</Text>
                             </View>
                           </View>
                          
@@ -120,11 +128,11 @@ componentDidMount=()=>{
                               borderRightColor: '#dddddd',
                               borderRightWidth: 1
                             }]}>
-                              <Text>GHS 000.0</Text>
+                              <Text>GHS 0.00</Text>
                               <Text>Wallet</Text>
                             </View>
                             <View style={styles.infoBox}>
-                            <Text>GHS 000.00</Text>
+                            <Text>GHS 0.00</Text>
                               <Text>Donated</Text>
                             </View>
                         </View>
@@ -176,8 +184,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 20,
   },
   caption: {
     fontSize: 14,

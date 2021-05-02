@@ -13,6 +13,8 @@ import {
   
 } from "react-native";
 import { View } from "react-native-animatable";
+import Toast from "react-native-toast-message"
+
 export default function App() {
   return (
     <Provider store={store}>
@@ -26,6 +28,7 @@ export default function App() {
                         fontWeight: "bold"
                     }}
                 />
+                <Toast ref={(ref) => Toast.setRef(ref)} /> 
     </Provider>
 
   );

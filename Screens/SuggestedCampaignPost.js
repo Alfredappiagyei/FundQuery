@@ -16,21 +16,20 @@ const SuggestedCampaignPost = ({ title, category, goal,location,image,about,navi
               title,
               category,
               goal,
-              location,
               image,
               about,
               navigation,
             })
           }
         >
-          {image != null ? (
-            <Image
-              source={require("../assets/default-img.jpg")}
-              style={styles.cardImage}
-            />
-          ) : (
-            <Image source={{uri: image}} style={styles.cardImage} />
-          )}
+          {image  != null ? 
+           <Image source={{uri:image}} style={styles.cardImage} />
+           : 
+           <Image
+           source={require("../assets/default-img.jpg")}
+           style={styles.cardImage}
+         />
+          }
 
           <View style={styles.cardHeader}>
             <Text category="s1" style={styles.title}>
@@ -45,11 +44,11 @@ const SuggestedCampaignPost = ({ title, category, goal,location,image,about,navi
            
             <View>
               <Text style={styles.amount}>
-                $400<Text> Raised</Text>
+                ghc0.00<Text> Raised</Text>
               </Text>
             </View>
             <Progress.Bar
-              progress={0.3}
+              progress={0}
               width={300}
               height={8}
               color="#009387"

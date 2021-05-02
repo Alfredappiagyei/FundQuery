@@ -5,8 +5,17 @@ export function registerWithEmail (email,password) {
        try {
           const user = await
           firebase.auth()
-          .createUserWithEmailAndPassword(email, password)
-          dispatch(loggedIn(user))
+          .createUserWithEmailAndPassword(email, password).then(() =>{
+         
+              firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid)
+              .set({
+                email: email,
+
+            }).catch(error =>{
+                console.log("Oouch  Something went wrong with added user to firestore:",error)
+           })
+          })
+          dispatch(loggedIn(user)) 
        }catch(error) {
             dispatch(registerError(error.message))
        }

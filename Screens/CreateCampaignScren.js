@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {v4 as uuid} from "uuid";
+import Fire from "../Fire";
 import * as Animatable from 'react-native-animatable';
 import {LinearGradient} from 'expo-linear-gradient'
 import {
@@ -16,13 +16,12 @@ import {
 } from "react-native";
 import { Ionicons,} from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
-import firebase from "../firebase/firebase"
+ 
 
 
 class CreateCampaignScren extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection('campaigns');
     this.state = {
       currentStep: 1 /* using index 0 as starting point */,
       steps: ["Start", "Almost Done", "Finish"],
@@ -43,89 +42,62 @@ class CreateCampaignScren extends Component {
     this.setState(state);
   }
 
-   
+
+  componentDidMount=()=>{
+    (async () => {
+      if (Platform.OS !== 'web') {
+       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+       }
+      }
+    })();
+  }
   
-componentDidMount=()=>{
-  (async () => {
-    if (Platform.OS !== 'web') {
-     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
-     }
-    }
-  })();
-}
+
+ 
+handlePost = () => {
+ Fire.shared.addPost({ 
+        title: this.state.title.trim(), 
+        category: this.state.category.trim(), 
+        goal: this.state.goal.trim(), 
+        location: this.state.location.trim(), 
+        about: this.state.about.trim(), 
+        localUri: this.state.image 
+      })
+      .then(ref => {
+          this.setState({
+             title: "",
+             category: "",
+             goal: "",
+             location: "",
+             about: "",
+            image: null 
+            });
+            Alert.alert('Campaign created successfully');
+            this.props.navigation.navigate('campaigns')
+      })
+      .catch(error => {
+          alert(error);
+      });
+};
+
+pickImage = async () => {
+  let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3]
+  });
+   console.log(result)
+  if (!result.cancelled) {
+      this.setState({ image: result.uri });
+  }
+};
 
 
   render() {
-    const { steps, currentStep } = this.state;
-    let { navigation } = this.props;
-
- 
-
-saveBoard =() => {
-  
-  this.setState({
-    isLoading: true,
-  });
-  this.ref.add({  
-    title: this.state.title,
-    category: this.state.category,
-    goal: this.state.goal,
-    location: this.state.location,
-    about: this.state.about,
-    image: this.state.image
-  }).then((docRef) => {
-    this.setState({
-      title: '',
-      category: "",
-      goal: "",
-      location:"",
-      about:"",
-      isLoading: false,
-      image: null
-    });
-    console.log(image)
-    Alert.alert('Campaign created successfully');
-    navigation.navigate('campaigns')
-  })
-  .catch((error) => {
-    console.error("Error adding document: ", error);
-    this.setState({
-      isLoading: false,
-    });
-  });
-
-}
-  
-
-
-    const pickImage = async () => {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-        base64: true
-      });
-      console.log(result);
+    const { steps, currentStep, } = this.state;
      
-      if (!result.cancelled) {
-        this.setState({
-          image:result.base64
-        });
-      }
-    };
-
-    if(this.state.isLoading){
-      return(
-        <View style={styles.activity}>
-          <ActivityIndicator size="large" color="#0000ff"/>
-        </View>
-      )
-    }
-
-
     return (
       <View style={{ flex: 2,  }}>
         <View
@@ -233,16 +205,13 @@ saveBoard =() => {
              style={styles.footer_start}
             >
                  <TouchableOpacity 
-                 onPress={pickImage}
-               style={{height: 200 }}>
-          {this.state.image ? (
-            <Image
-            source={{uri: 'data:image/jpeg;base64,' + this.state.image}}
-              style={{ width: '100%', height: 200 }}
-            />
-          ) : (
-            <Image source={require('../assets/default-img.jpg')}  style={{ width: '100%', height: 200 }} />
-          )}
+                  onPress={this.pickImage}
+               style={{height: 200, borderWidth:1, borderStyle: "dashed", borderColor:"#000" }}>
+               
+            {this.state.image  ? <Image  source={{ uri: this.state.image }} style={{ width: '100%', height: 200 }}/> :
+
+          <Image source={require('../assets/default-img.jpg')} style={{ width: '100%', height: 200 }}  />
+          }       
         </TouchableOpacity>
 
 
@@ -296,7 +265,7 @@ saveBoard =() => {
               </View>
 
                
-              <Text style={[styles.text_footer, {marginTop: 35}]}>Campaign Goal</Text>
+              <Text style={[styles.text_footer, {marginTop: 35}]}>Location</Text>
                 <View style={styles.action}>  
                 <TextInput
                   value={this.state.location}
@@ -325,7 +294,7 @@ saveBoard =() => {
                   placeholderTextColor="lightgrey"
                    style={{height:200, borderWidth:1, borderColor:"#000", borderStyle:"dotted",borderRadius:5}}
                   editable = {true}
-                  maxLength = {100}
+                  maxLength = {1000}
                   multiline={true}
                   returnKeyType="done"
                   editable={true}
@@ -395,7 +364,7 @@ saveBoard =() => {
             {currentStep + 1 ==
               steps.length /* add other conditions here */ && (
               <TouchableOpacity
-                onPress={saveBoard}
+              onPress={this.handlePost}
               >
                  <LinearGradient
                      colors={['#08d4c4', '#01ab9d']}

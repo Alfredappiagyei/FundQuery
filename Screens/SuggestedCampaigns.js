@@ -27,7 +27,6 @@ class SuggestedCampaigns extends Component {
     this.unsubscribe = null;
     this.state = {
       isLoading: true,
-      campaigns: [],
       animation: new Animated.Value(0),
       isVisible: false,
       isVisibletwo: false,
@@ -79,6 +78,7 @@ class SuggestedCampaigns extends Component {
     .then((querySnapshot) => {      
       querySnapshot.forEach((doc) => {
         const {
+        
           title,
           category,
           goal,
@@ -272,6 +272,7 @@ class SuggestedCampaigns extends Component {
                     about={item.about}
                     image={item.image}
                     navigation={navigation}
+                    key={item}
                   />                  
                 </View>
               );
