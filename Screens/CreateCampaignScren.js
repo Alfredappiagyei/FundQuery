@@ -16,6 +16,7 @@ import {
 } from "react-native";
 import { Ionicons,} from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
+import { ScrollView } from "react-native-gesture-handler";
  
 
 
@@ -24,7 +25,7 @@ class CreateCampaignScren extends Component {
     super(props);
     this.state = {
       currentStep: 1 /* using index 0 as starting point */,
-      steps: ["Start", "Almost Done", "Finish"],
+      steps: ["Start", "Almost", "Finish"],
       title: "",
       category: "",
       goal: "",
@@ -103,9 +104,9 @@ pickImage = async () => {
         <View
           style={{
             alignItems: "center",
-            flex: 2,
+            flex: 1.5,
             backgroundColor: "#009387",
-            justifyContent: "center",
+            
           }}
         >
           <View style={{ width: 230}}>
@@ -143,8 +144,7 @@ pickImage = async () => {
                         borderWidth: 2,
                         borderColor: "#75cfb8",
                         borderRadius: 15,
-                        marginBottom: 10,
-                        top:-5
+                        
                       }}
                     >
                       <Text style={{ fontSize: 15, color: "#ee5e30" }}>
@@ -163,8 +163,8 @@ pickImage = async () => {
                         borderWidth: 2,
                         borderColor: "#0faf9a",
                         borderRadius: 15,
-                        marginBottom: 10,
-                        top:-5
+                   
+                      
                       }}
                     >
                       <Ionicons name="md-checkmark" size={20} color="#fff" />
@@ -181,8 +181,8 @@ pickImage = async () => {
                         borderWidth: 2,
                         borderColor: "#ee5e30",
                         borderRadius: 15,
-                        marginBottom: 10,
-                        top:-5
+                     
+                        
                       }}
                     >
                       <Text style={{ fontSize: 13, color: "#ffffff" }}>
@@ -200,23 +200,24 @@ pickImage = async () => {
 
         <View style={{ backgroundColor: "#f6f6f6", flex: 10, backgroundColor:"#fff" }}>
           {currentStep == 0 && (
+            
             <Animatable.View 
                animation="fadeInUpBig"
              style={styles.footer_start}
             >
                  <TouchableOpacity 
                   onPress={this.pickImage}
-               style={{height: 200, borderWidth:1, borderStyle: "dashed", borderColor:"#000" }}>
+               style={{ borderWidth:1, borderStyle: "dashed", borderColor:"#000", height: Platform.OS === 'ios' ? 200 : 150, }}>
                
-            {this.state.image  ? <Image  source={{ uri: this.state.image }} style={{ width: '100%', height: 200 }}/> :
+            {this.state.image  ? <Image  source={{ uri: this.state.image }} style={{ width: '100%',  height: Platform.OS === 'ios' ? 200 : 150, }}/> :
 
-          <Image source={require('../assets/default-img.jpg')} style={{ width: '100%', height: 200 }}  />
+          <Image source={require('../assets/default-img.jpg')} style={{ width: '100%', height: Platform.OS === 'ios' ? 200 : 150, }}  />
           }       
         </TouchableOpacity>
 
 
              
-              <Text style={[styles.text_footer, {marginTop: 35}]}>Campaign Title</Text>
+              <Text style={[styles.text_footer, { marginTop: Platform.OS === 'ios' ? 35 : 20,}]}>Campaign Title</Text>
               <View style={styles.action}>
                  <TextInput   
                    placeholder="Enter campaign title"
@@ -231,7 +232,7 @@ pickImage = async () => {
 
 
                
-              <Text style={[styles.text_footer, {marginTop: 35}]}>Category</Text>
+              <Text style={[styles.text_footer, { marginTop: Platform.OS === 'ios' ? 35 : 20,}]}>Category</Text>
               <View style={styles.action}>
                 <TextInput
                   value={this.state.category}
@@ -244,6 +245,7 @@ pickImage = async () => {
                 />
               </View> 
             </Animatable.View>
+ 
           )}
           {currentStep == 1 && (
             <Animatable.View
@@ -307,7 +309,8 @@ pickImage = async () => {
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
-              top: 30,
+           top: Platform.OS === 'ios' ? 30 : 10,
+              
             }}
           >
             {currentStep > 0 ? (
@@ -440,7 +443,7 @@ footer_middle: {
   borderTopLeftRadius: 30,
   borderTopRightRadius: 30,
   paddingHorizontal: 20,
-  paddingVertical: 100
+  paddingVertical: 30
 },
 footer_end: {
   backgroundColor: '#fff',

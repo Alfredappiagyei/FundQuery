@@ -34,6 +34,7 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
     };
     return (
         <>
+
             {auth.login ? (
                 <View style={styles.container}>
                     <StatusBar backgroundColor="red" barStyle="light-content" />
@@ -45,6 +46,7 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
                             styles.footer,
                             {
                                 backgroundColor: colors.background,
+                                zIndex: Platform.OS === 'ios' ? 2 : 2,
                             },
                         ]}
                         animation="fadeInUpBig"
@@ -87,13 +89,25 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
                             </TouchableOpacity>
                         </View>
                         <View>
+                        { Platform.OS === 'ios'?(
+                              <Progress.Bar
+                              progress={0}
+                              width={350}
+                              height={7}
+                              color="#009387"
+                              style={{ marginVertical: 20 }}
+                          />
+                        ):(
                             <Progress.Bar
-                                progress={0.3}
-                                width={350}
-                                height={7}
-                                color="#009387"
-                                style={{ marginVertical: 20 }}
-                            />
+                            progress={0}
+                            width={280}
+                            height={7}
+                            color="#009387"
+                            style={{ marginVertical: 20 }}
+                        />
+                        )}
+
+                       
                             <View style={styles.info}>
                                     <Image style={styles.profile} source={{uri:image}} />
                                     
@@ -122,6 +136,7 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
                             styles.footer2,
                             {
                                 backgroundColor: colors.background,
+                                zIndex: Platform.OS === 'ios' ? 2 : 2,
                             },
                         ]}
                         animation="fadeInUpBig"
@@ -167,20 +182,31 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
                             </TouchableOpacity>
                         </View>
                         <View>
+                        { Platform.OS === 'ios'?(
+                              <Progress.Bar
+                              progress={0}
+                              width={350}
+                              height={7}
+                              color="#009387"
+                              style={{ marginVertical: 20 }}
+                          />
+                        ):(
                             <Progress.Bar
-                                progress={0.3}
-                                width={350}
-                                height={7}
-                                color="#009387"
-                                style={{ marginVertical: 20 }}
-                            />
+                            progress={0}
+                            width={280}
+                            height={7}
+                            color="#009387"
+                            style={{ marginVertical: 20 }}
+                        />
+                        )}
+
                             <View style={styles.info}>
  
                                     <Image style={styles.profile}  source={{uri:image}}/>
                               
-                                <Text style={styles.author}>GH000</Text>
+                                <Text style={styles.author}>GH 000 </Text>
                                 <Text>Raised of </Text>
-                                <Text style={styles.petdetails}>GHC {goal}</Text>
+                                <Text style={styles.petdetails}>GHC {goal} </Text>
                                 <Text>Goal</Text>
                             </View>
                         </View>

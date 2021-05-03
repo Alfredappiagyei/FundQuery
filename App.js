@@ -6,29 +6,22 @@ import { store, persistor } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import Navigations from "./Screens/navigations";
 import CustomisableAlert from "react-native-customisable-alert";
-import {
-  TouchableWithoutFeedback,
-   keyboard
-  
-  
-} from "react-native";
-import { View } from "react-native-animatable";
 import Toast from "react-native-toast-message"
 
 export default function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-          <Navigations />
+        <Navigations />
       </PersistGate>
-         
+
       <CustomisableAlert
-                    titleStyle={{
-                        fontSize: 18,
-                        fontWeight: "bold"
-                    }}
-                />
-                <Toast ref={(ref) => Toast.setRef(ref)} /> 
+        titleStyle={{
+          fontSize: 18,
+          fontWeight: "bold"
+        }}
+      />
+      <Toast ref={(ref) => Toast.setRef(ref)} />
     </Provider>
 
   );

@@ -255,8 +255,7 @@ const ProfileStackScreen =() =>{
           
             :
           <Stack.Navigator>   
-            <Stack.Screen name="splashscreen" component={SplashScreen} options={{headerShown: false}}/>  
-            <Stack.Screen name="home" component={HomeScreen} options={{headerShown: false}}/>       
+            <Stack.Screen name="splashscreen" component={SplashScreen} options={{headerShown: false}}/>        
             <Stack.Screen name="Signin" component={SignInScreen} />
             <Stack.Screen name="Signup" component={SignIpScreen} /> 
  
@@ -340,19 +339,7 @@ const ProfileStackScreen =() =>{
       }} 
          name="success" component={SuccessStories} />
         
-        <Stack.Screen
-         options={{ 
-          headerTitle:"Plan",
-          headerStyle:{
-            backgroundColor:"#fff",
-            borderColor:"fff"
-          },
-          headerTitleStyle:{
-            color:"#000",
-            fontSize:22,
-          },     
-      }} 
-         name="plan" component={Plan} />
+     
           </Stack.Navigator>
         }
 

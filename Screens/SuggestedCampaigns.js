@@ -52,6 +52,7 @@ class SuggestedCampaigns extends Component {
       Animated.timing(this.state.animation, {
         toValue: 0,
         duration: 1000,
+        useNativeDriver: true
       }).start();
 
     } else {
@@ -59,6 +60,7 @@ class SuggestedCampaigns extends Component {
       Animated.timing(this.state.animation, {
         toValue: 1,
         duration: 400,
+        useNativeDriver: true
       }).start();
     }
     this._open = !this._open
@@ -77,8 +79,7 @@ class SuggestedCampaigns extends Component {
     .get()
     .then((querySnapshot) => {      
       querySnapshot.forEach((doc) => {
-        const {
-        
+        const {  
           title,
           category,
           goal,
@@ -129,6 +130,7 @@ class SuggestedCampaigns extends Component {
     const saveInterpolate = this.state.animation.interpolate({
       inputRange: [0, 0.5, 1],
       outputRange: [0, -80, -180],
+      
     });
 
     const printStyle = {
@@ -259,7 +261,7 @@ class SuggestedCampaigns extends Component {
         <FlatList
           style={styles.container}
           data={this.state.campaigns}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => item.id}
           renderItem={
             ({item}) => {
               return (
@@ -272,7 +274,6 @@ class SuggestedCampaigns extends Component {
                     about={item.about}
                     image={item.image}
                     navigation={navigation}
-                    key={item}
                   />                  
                 </View>
               );

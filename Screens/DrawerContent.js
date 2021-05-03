@@ -5,7 +5,6 @@ import {
     Avatar,
     Drawer,
     Text,
-    Switch
 } from 'react-native-paper';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Ionicons,MaterialCommunityIcons, Entypo, MaterialIcons} from '@expo/vector-icons'; 
@@ -170,16 +169,11 @@ const styles = StyleSheet.create({
 });
   
  
+ 
 
 
-const mapStateToProps = (state)=>{
-  return {
-    auth:state.firebase.auth
-  }
- };
-const mapDispatchToProps = {
-  logoutUser
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(DrawerContent);
+const mapStateToProps =(state) =>{
+  return {auth:state}
+}
+export default connect(mapStateToProps, {logoutUser})(DrawerContent);
  

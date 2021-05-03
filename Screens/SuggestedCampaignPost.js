@@ -47,13 +47,23 @@ const SuggestedCampaignPost = ({ title, category, goal,location,image,about,navi
                 ghc0.00<Text> Raised</Text>
               </Text>
             </View>
-            <Progress.Bar
-              progress={0}
-              width={300}
-              height={8}
-              color="#009387"
-              style={{ marginTop: 5 }}
-            />
+              { Platform.OS === 'ios'?(
+                              <Progress.Bar
+                              progress={0}
+                              width={350}
+                              height={7}
+                              color="#009387"
+                              style={{ marginVertical: 20 }}
+                          />
+                        ):(
+                            <Progress.Bar
+                            progress={0}
+                            width={250}
+                            height={7}
+                            color="#009387"
+                            style={{ marginVertical: 20 }}
+                        />
+                        )}
 
             <View style={{ flexDirection: "row", marginTop: 9 }}>
               <Text category="s1" style={{ 
@@ -106,7 +116,7 @@ const styles = StyleSheet.create({
 description: {
   color:"#000",
   fontSize:18, 
-  fontFamily: 'ArialHebrew-Light'
+  fontFamily: Platform.OS === 'ios' ?'ArialHebrew-Light' : "",
 }, 
 amount: {
   color: '#777777',
