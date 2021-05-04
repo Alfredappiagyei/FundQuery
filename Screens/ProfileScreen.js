@@ -70,12 +70,7 @@ class ProfileScreen extends React.Component {
       }
     }
 
-    var user = firebase.auth().currentUser;
-    var email;
-    if (user != null) {
-      email = user.email;
-    }
-    console.log(user.email)
+ 
     return (
       <ScrollView style={styles.container}>
         <StatusBar backgroundColor='#009387' barStyle="light-content" />
@@ -103,8 +98,7 @@ class ProfileScreen extends React.Component {
                <Text style={[styles.title, {
                 marginTop: 15,
                 marginBottom: 5,
-              }]}>{user.email}</Text> 
-              <Text style={styles.caption}>@j_doe</Text>
+              }]}>issac@gmail.com</Text> 
             </View>
           </View>
         </View>
@@ -113,12 +107,9 @@ class ProfileScreen extends React.Component {
         <View style={styles.userInfoSection}>
           <View style={styles.row}>
             <MaterialCommunityIcons name="map-marker-radius" color="#777777" size={20} />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>Kolkata, India</Text>
+            <Text style={{ color: "#777777", marginLeft: 20 }}>Accra ghana</Text>
           </View>
-          <View style={styles.row}>
-            <Entypo name="email" color="#777777" size={20} />
-             <Text style={{ color: "#777777", marginLeft: 20 }}>{user.email}</Text> 
-          </View>
+          
         </View>
 
         <View style={styles.infoBoxWrapper}>

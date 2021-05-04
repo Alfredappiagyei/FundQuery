@@ -79,7 +79,8 @@ class SuggestedCampaigns extends Component {
     .get()
     .then((querySnapshot) => {      
       querySnapshot.forEach((doc) => {
-        const {  
+        const {
+        
           title,
           category,
           goal,
@@ -261,7 +262,7 @@ class SuggestedCampaigns extends Component {
         <FlatList
           style={styles.container}
           data={this.state.campaigns}
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={(item) => item.id}
           renderItem={
             ({item}) => {
               return (
@@ -274,6 +275,7 @@ class SuggestedCampaigns extends Component {
                     about={item.about}
                     image={item.image}
                     navigation={navigation}
+                    key={item}
                   />                  
                 </View>
               );

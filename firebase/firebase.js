@@ -1,14 +1,14 @@
 import * as firebase from 'firebase'
  
 import 'firebase/auth';
- var firebaseConfig = {
-    apiKey: "AIzaSyDuYFbNVd8YeXQyXYLmpz_p003RUHEhLOA",
-    authDomain: "finalproject-d83dc.firebaseapp.com",
-    projectId: "finalproject-d83dc",
-    storageBucket: "finalproject-d83dc.appspot.com",
-    messagingSenderId: "330493720164",
-    appId: "1:330493720164:web:ada83a69b307951abf9171"
-  }
+var firebaseConfig = {
+  apiKey: "AIzaSyCO8kCOtzb564_LycOLOdlofZ8CeA-GPPk",
+  authDomain: "fundquerry.firebaseapp.com",
+  projectId: "fundquerry",
+  storageBucket: "fundquerry.appspot.com",
+  messagingSenderId: "671529970234",
+  appId: "1:671529970234:web:01b1ccb8f1ce1e0b45a303"
+};
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

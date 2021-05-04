@@ -23,8 +23,7 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
     const { colors } = useTheme();
     const myCustomShare = async () => {
         const shareptions = {
-            message: "This is the message",
-            uri: image,
+            message: "Let people know about yoour campaign or the campaign of others",
         };
         try {
             const result = await Share.share(shareptions);
@@ -34,7 +33,6 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
     };
     return (
         <>
-
             {auth.login ? (
                 <View style={styles.container}>
                     <StatusBar backgroundColor="red" barStyle="light-content" />

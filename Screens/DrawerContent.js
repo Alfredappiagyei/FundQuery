@@ -32,8 +32,8 @@ import { logoutUser } from "../store/authActions";
                         size={50}
                     />
                     <View style={{marginLeft:15, flexDirection:'column'}}>
-                        <Text style={styles.title}>John Doe</Text>
-                        <Text style={styles.caption}>@j_doe</Text>
+                        <Text style={styles.title}>issac@gmail.com</Text>
+                        
                     </View>
                 </View>
                 </TouchableOpacity>
