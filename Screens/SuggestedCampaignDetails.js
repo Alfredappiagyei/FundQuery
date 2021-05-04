@@ -39,6 +39,7 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
                     <View style={styles.header}>
                         <Image style={styles.image} source={{uri:image}}/>
                     </View>
+                    
                     <Animatable.View
                         style={[
                             styles.footer,
@@ -49,6 +50,7 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
                         ]}
                         animation="fadeInUpBig"
                     >
+                        <ScrollView  showsVerticalScrollIndicator={false}>
                         <Text
                             style={[
                                 styles.title,
@@ -115,6 +117,7 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
                                 <Text> Goal</Text>
                             </View>
                         </View>
+                        </ScrollView>
                     </Animatable.View>
                 </View>
             ) : 
@@ -139,6 +142,7 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
                         ]}
                         animation="fadeInUpBig"
                     >
+                        <ScrollView>
                         <Text
                             style={[
                                 styles.title,
@@ -208,6 +212,7 @@ function SuggestedCampaignDetails({ auth, route, navigation }) {
                                 <Text>Goal</Text>
                             </View>
                         </View>
+                        </ScrollView>
                     </Animatable.View>
                 </View>
             )}

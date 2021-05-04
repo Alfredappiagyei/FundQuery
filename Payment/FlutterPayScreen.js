@@ -56,8 +56,7 @@ export default function FluterPayScreen() {
        alertType: "success", 
        onPress: () => {
          Toast.show({
-           text1: "Hello",
-           text2:`This is something i want ${amount} to show`,
+           text1:`Payment made ${amount}`,
          })
        }
      });

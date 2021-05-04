@@ -60,7 +60,7 @@ class ProfileScreen extends React.Component {
 
     const myCustomShare = async () => {
       const shareptions = {
-        message: "This is the message",
+        message: "Let people know about yoour campaign or the campaign of others",
       }
       try {
         const result = await Share.share(shareptions);
